@@ -5,6 +5,7 @@ export const resolvers = {
     users(parent, args, context) {
       return [{ name: "Nextjs" }];
     },
+
     async posts(parent, args, context) {
       return await prisma.post.findMany({
         where: { published: true },
