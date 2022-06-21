@@ -1,21 +1,6 @@
 import { createServer } from "@graphql-yoga/node";
-
-const typeDefs = `
-  type Query {
-    users: [User!]!
-  }
-  type User {
-    name: String
-  }
-`;
-
-const resolvers = {
-  Query: {
-    users(parent, args, context) {
-      return [{ name: "Nextjs" }];
-    },
-  },
-};
+import { typeDefs } from "../../graphql/typeDefs";
+import { resolvers } from "../../graphql/resolvers";
 
 const server = createServer({
   schema: {
