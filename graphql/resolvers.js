@@ -32,6 +32,15 @@ export const resolvers = {
         },
       });
     },
+
+    async publishedPosts(parent, args, context) {
+      return await prisma.post.findMany({
+        where: { published: true },
+        include: {
+          author: true,
+        },
+      });
+    },
   },
 
   Mutation: {
