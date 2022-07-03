@@ -1,3 +1,4 @@
+import { getSession } from "next-auth/react";
 import prisma from "../lib/prismaClient";
 
 export const resolvers = {
@@ -28,6 +29,32 @@ export const resolvers = {
           },
         },
       });
+    },
+  },
+
+  Mutation: {
+    async createPost(parent, args, context) {
+      const { title, content } = args.input;
+
+      const result = await prisma.post.create({
+        data: {
+          title: title,
+          content: content,
+          published: false,
+          author: { connect: { email: context.session?.user?.email } },
+        },
+      });
+
+      const user = await prisma.user.findUnique({
+        where: {
+          id: result.authorId,
+        },
+      });
+
+      return {
+        ...result,
+        author: user,
+      };
     },
   },
 };
