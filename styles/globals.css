@@ -9,8 +9,56 @@ body {
 a {
   color: inherit;
   text-decoration: none;
+  display: inline-block;
 }
 
 * {
   box-sizing: border-box;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+
+.left a[data-active="true"] {
+  color: gray;
+}
+
+a+a {
+  margin-left: 1rem;
+}
+
+.right {
+  margin-left: auto;
+}
+
+.right a {
+  border: 1px solid var(--geist-foreground);
+  padding: 0.5rem 1rem;
+  border-radius: 3px;
+}
+
+p {
+  display: inline-block;
+  font-size: 13px;
+  padding-right: 1rem;
+}
+
+button {
+  border: none;
+}
+
+nav {
+  display: flex;
+  padding: 2rem;
+  align-items: center;
+}
+
+.main-container {
+  padding: 0 2rem;
+}
+
+.container {
+  padding: 0 2rem;
 }
