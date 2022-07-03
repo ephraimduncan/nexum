@@ -14,11 +14,8 @@ export const resolvers = {
 
     async posts(parent, args, context) {
       return await prisma.post.findMany({
-        where: { published: true },
         include: {
-          author: {
-            select: { name: true },
-          },
+          author: true,
         },
       });
     },
@@ -30,7 +27,7 @@ export const resolvers = {
         },
         include: {
           author: {
-            select: { name: true },
+            select: { name: true }, // Returns only the name of the author
           },
         },
       });
@@ -60,6 +57,16 @@ export const resolvers = {
         ...result,
         author: user,
       };
+    },
+
+    async publishPost(parent, args, context) {
+      return await prisma.post.update({
+        where: { id: args.id },
+        data: { published: true },
+        include: {
+          author: true,
+        },
+      });
     },
   },
 

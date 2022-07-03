@@ -11,6 +11,7 @@ export const typeDefs = gql`
 
   type Mutation {
     createPost(input: PostInput!): Post
+    publishPost(id: ID!): Post
   }
 
   type User {
@@ -25,9 +26,9 @@ export const typeDefs = gql`
 
   type Post {
     id: ID!
-    title: String
+    title: String!
     content: String
-    published: Boolean
+    published: Boolean!
     author: User
   }
 
