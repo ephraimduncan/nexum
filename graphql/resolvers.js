@@ -25,6 +25,15 @@ export const resolvers = {
       });
     },
 
+    async drafts(_, args, context) {
+      return await context.prisma.post.findMany({
+        where: { published: false },
+        include: {
+          author: true,
+        },
+      });
+    },
+
     async publishedPosts(_, args, context) {
       return await context.prisma.post.findMany({
         where: { published: true },

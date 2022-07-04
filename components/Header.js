@@ -56,6 +56,11 @@ const Header = () => {
             Next.js FullStack Starter
           </a>
         </Link>
+        <Link href="/drafts">
+          <a className="bold draft" data-active={isActive("/drafts")}>
+            Drafts
+          </a>
+        </Link>
       </div>
     );
     right = (
