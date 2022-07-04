@@ -1,4 +1,3 @@
-// Header.tsx
 import React from "react";
 import Link from "next/link";
 import { useRouter } from "next/router";
@@ -43,7 +42,7 @@ const Header = () => {
     right = (
       <div className="right">
         <Link href="/api/auth/signin">
-          <a data-active={isActive("/signup")}>Log in</a>
+          <button data-active={isActive("/signup")}>Log In</button>
         </Link>
       </div>
     );

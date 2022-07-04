@@ -1,5 +1,6 @@
 import { useRouter } from "next/router";
 import { useSession } from "next-auth/react";
+import Layout from "../components/Layout";
 
 export default function ProfilePage() {
   const router = useRouter();
@@ -12,19 +13,28 @@ export default function ProfilePage() {
 
   if (status === "unauthenticated") {
     return (
-      <div>
-        You need to be signed In. <h1>Redirecting to Sign In Page</h1>
-      </div>
+      <Layout>
+        <div>
+          You need to be signed In. <h1>Redirecting to Sign In Page</h1>
+        </div>
+      </Layout>
     );
   }
 
   if (status === "loading") {
-    return <div>Page Loading...</div>;
+    return (
+      <Layout>
+        <div>Page Loading...</div>;
+      </Layout>
+    );
   }
 
   return (
-    <div>
-      <pre>{JSON.stringify(session, null, 2)}</pre>
-    </div>
+    <Layout>
+      <div>
+        <h2>Profile Page</h2>
+        <pre>{JSON.stringify(session, null, 2)}</pre>
+      </div>
+    </Layout>
   );
 }
