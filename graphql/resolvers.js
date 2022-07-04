@@ -1,9 +1,11 @@
 import prisma from "../lib/prismaClient";
 import { Kind } from "graphql/language";
 import { GraphQLScalarType } from "graphql";
+import { AuthenticationError } from "apollo-server-errors";
 
 export const resolvers = {
   Query: {
+    // Remove this. It is useless
     async users(parent, args, context) {
       return await prisma.user.findMany({
         include: {
@@ -47,6 +49,10 @@ export const resolvers = {
     async createPost(parent, args, context) {
       const { title, content } = args.input;
 
+      if (!context.session) {
+        throw new AuthenticationError("You must be logged in to create a post");
+      }
+
       const result = await prisma.post.create({
         data: {
           title: title,
@@ -69,6 +75,10 @@ export const resolvers = {
     },
 
     async publishPost(parent, args, context) {
+      if (!context.session) {
+        throw new AuthenticationError("You must be logged in to create a post");
+      }
+
       return await prisma.post.update({
         where: { id: args.id },
         data: { published: true },
@@ -79,6 +89,10 @@ export const resolvers = {
     },
 
     async deletePost(parent, args, context) {
+      if (!context.session) {
+        throw new AuthenticationError("You must be logged in to create a post");
+      }
+
       return await prisma.post.delete({
         where: { id: args.id },
       });
