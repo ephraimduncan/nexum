@@ -18,6 +18,7 @@ export const typeDefs = gql`
     updatePost(id: ID!, input: PostInput!): Post
 
     updateUser(input: UserInput!): User
+    deleteUser(email: String!): User
   }
 
   type User {

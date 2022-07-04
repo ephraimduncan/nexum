@@ -137,6 +137,26 @@ export const resolvers = {
         },
       });
     },
+
+    async deleteUser(parent, args, context) {
+      if (!context.session) {
+        throw new AuthenticationError("You must be logged in to delete a user");
+      }
+
+      const user = await prisma.user.findUnique({
+        where: {
+          email: args.email,
+        },
+      });
+
+      await prisma.post.deleteMany({
+        where: { authorId: user.id },
+      });
+
+      return await prisma.user.delete({
+        where: { email: args.email },
+      });
+    },
   },
 
   DateTime: new GraphQLScalarType({
