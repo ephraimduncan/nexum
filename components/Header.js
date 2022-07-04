@@ -14,7 +14,7 @@ const Header = () => {
     <div className="left">
       <Link href="/">
         <a className="bold" data-active={isActive("/")}>
-          Feed
+          Next.js FullStack Starter
         </a>
       </Link>
     </div>
@@ -27,7 +27,7 @@ const Header = () => {
       <div className="left">
         <Link href="/">
           <a className="bold" data-active={isActive("/")}>
-            Feed
+            Next.js FullStack Starter
           </a>
         </Link>
       </div>
@@ -54,7 +54,7 @@ const Header = () => {
       <div className="left">
         <Link href="/">
           <a className="bold" data-active={isActive("/")}>
-            Feed
+            Next.js FullStack Starter
           </a>
         </Link>
       </div>

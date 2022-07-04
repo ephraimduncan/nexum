@@ -1,7 +1,8 @@
+import { getSession } from "next-auth/react";
+import prisma from "../lib/prismaClient";
 import { createServer } from "@graphql-yoga/node";
 import { typeDefs } from "../../graphql/typeDefs";
 import { resolvers } from "../../graphql/resolvers";
-import { getSession } from "next-auth/react";
 
 const server = createServer({
   schema: {
@@ -11,7 +12,7 @@ const server = createServer({
   endpoint: "/api/graphql",
   context: async ({ req, res }) => {
     const session = await getSession({ req });
-    return { session };
+    return { session, prisma };
   },
 });
 

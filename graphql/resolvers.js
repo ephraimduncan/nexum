@@ -1,36 +1,19 @@
-import prisma from "../lib/prismaClient";
 import { Kind } from "graphql/language";
 import { GraphQLScalarType } from "graphql";
 import { AuthenticationError } from "apollo-server-errors";
 
 export const resolvers = {
   Query: {
-    // async users(parent, args, context) {
-    //   return await prisma.user.findMany({
-    //     include: {
-    //       posts: true,
-    //     },
-    //   });
-    // },
-
-    // async user(parent, args, context) {
-    //   return await prisma.user.findUnique({
-    //     where: {
-    //       email: args.email,
-    //     },
-    //   });
-    // },
-
-    async posts(parent, args, context) {
-      return await prisma.post.findMany({
+    async posts(_, args, context) {
+      return await context.prisma.post.findMany({
         include: {
           author: true,
         },
       });
     },
 
-    async post(parent, args, context) {
-      return await prisma.post.findUnique({
+    async post(_, args, context) {
+      return await context.prisma.post.findUnique({
         where: {
           id: args.id,
         },
@@ -42,8 +25,8 @@ export const resolvers = {
       });
     },
 
-    async publishedPosts(parent, args, context) {
-      return await prisma.post.findMany({
+    async publishedPosts(_, args, context) {
+      return await context.prisma.post.findMany({
         where: { published: true },
         include: {
           author: true,
@@ -53,14 +36,14 @@ export const resolvers = {
   },
 
   Mutation: {
-    async createPost(parent, args, context) {
+    async createPost(_, args, context) {
       const { title, content } = args.input;
 
       if (!context.session) {
         throw new AuthenticationError("You must be logged in to create a post");
       }
 
-      const result = await prisma.post.create({
+      const result = await context.prisma.post.create({
         data: {
           title: title,
           content: content,
@@ -69,7 +52,7 @@ export const resolvers = {
         },
       });
 
-      const user = await prisma.user.findUnique({
+      const user = await context.prisma.user.findUnique({
         where: {
           id: result.authorId,
         },
@@ -81,12 +64,12 @@ export const resolvers = {
       };
     },
 
-    async publishPost(parent, args, context) {
+    async publishPost(_, args, context) {
       if (!context.session) {
         throw new AuthenticationError("You must be logged in to publish a post");
       }
 
-      return await prisma.post.update({
+      return await context.prisma.post.update({
         where: { id: args.id },
         data: { published: true },
         include: {
@@ -95,14 +78,14 @@ export const resolvers = {
       });
     },
 
-    async updatePost(parent, args, context) {
+    async updatePost(_, args, context) {
       const { title, content, publish } = args.input;
 
       if (!context.session) {
         throw new AuthenticationError("You must be logged in to update a post");
       }
 
-      return await prisma.post.update({
+      return await context.prisma.post.update({
         where: { id: args.id },
         data: {
           title,
@@ -115,22 +98,22 @@ export const resolvers = {
       });
     },
 
-    async deletePost(parent, args, context) {
+    async deletePost(_, args, context) {
       if (!context.session) {
         throw new AuthenticationError("You must be logged in to delete a post");
       }
 
-      return await prisma.post.delete({
+      return await context.prisma.post.delete({
         where: { id: args.id },
       });
     },
 
-    async updateUser(parent, args, context) {
+    async updateUser(_, args, context) {
       if (!context.session) {
         throw new AuthenticationError("You must be logged in to update a user");
       }
 
-      return await prisma.user.update({
+      return await context.prisma.user.update({
         where: { email: context.session.user.email },
         data: {
           ...args.input,
@@ -138,22 +121,22 @@ export const resolvers = {
       });
     },
 
-    async deleteUser(parent, args, context) {
+    async deleteUser(_, args, context) {
       if (!context.session) {
         throw new AuthenticationError("You must be logged in to delete a user");
       }
 
-      const user = await prisma.user.findUnique({
+      const user = await context.prisma.user.findUnique({
         where: {
           email: args.email,
         },
       });
 
-      await prisma.post.deleteMany({
+      await context.prisma.post.deleteMany({
         where: { authorId: user.id },
       });
 
-      return await prisma.user.delete({
+      return await context.prisma.user.delete({
         where: { email: args.email },
       });
     },
