@@ -4,7 +4,8 @@ export const typeDefs = gql`
   scalar DateTime
 
   type Query {
-    users: [User!]!
+    # users: [User!]!
+    # user(email: String!): User!
     posts: [Post!]!
     post(id: ID!): Post!
     publishedPosts: [Post!]
@@ -15,6 +16,8 @@ export const typeDefs = gql`
     publishPost(id: ID!): Post
     deletePost(id: ID!): Post!
     updatePost(id: ID!, input: PostInput!): Post
+
+    updateUser(input: UserInput!): User
   }
 
   type User {
@@ -39,5 +42,10 @@ export const typeDefs = gql`
     title: String!
     content: String
     publish: Boolean
+  }
+
+  # Add feature to update email with verification and profile picture
+  input UserInput {
+    name: String
   }
 `;

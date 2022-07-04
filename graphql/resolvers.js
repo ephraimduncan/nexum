@@ -5,14 +5,21 @@ import { AuthenticationError } from "apollo-server-errors";
 
 export const resolvers = {
   Query: {
-    // Remove this. It is useless
-    async users(parent, args, context) {
-      return await prisma.user.findMany({
-        include: {
-          posts: true,
-        },
-      });
-    },
+    // async users(parent, args, context) {
+    //   return await prisma.user.findMany({
+    //     include: {
+    //       posts: true,
+    //     },
+    //   });
+    // },
+
+    // async user(parent, args, context) {
+    //   return await prisma.user.findUnique({
+    //     where: {
+    //       email: args.email,
+    //     },
+    //   });
+    // },
 
     async posts(parent, args, context) {
       return await prisma.post.findMany({
@@ -115,6 +122,19 @@ export const resolvers = {
 
       return await prisma.post.delete({
         where: { id: args.id },
+      });
+    },
+
+    async updateUser(parent, args, context) {
+      if (!context.session) {
+        throw new AuthenticationError("You must be logged in to update a user");
+      }
+
+      return await prisma.user.update({
+        where: { email: context.session.user.email },
+        data: {
+          ...args.input,
+        },
       });
     },
   },
