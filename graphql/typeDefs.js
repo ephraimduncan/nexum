@@ -14,6 +14,7 @@ export const typeDefs = gql`
     createPost(input: PostInput!): Post
     publishPost(id: ID!): Post
     deletePost(id: ID!): Post!
+    updatePost(id: ID!, input: PostInput!): Post
   }
 
   type User {
@@ -37,5 +38,6 @@ export const typeDefs = gql`
   input PostInput {
     title: String!
     content: String
+    publish: Boolean
   }
 `;

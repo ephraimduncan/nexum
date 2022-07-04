@@ -76,7 +76,7 @@ export const resolvers = {
 
     async publishPost(parent, args, context) {
       if (!context.session) {
-        throw new AuthenticationError("You must be logged in to create a post");
+        throw new AuthenticationError("You must be logged in to publish a post");
       }
 
       return await prisma.post.update({
@@ -88,9 +88,29 @@ export const resolvers = {
       });
     },
 
+    async updatePost(parent, args, context) {
+      const { title, content, publish } = args.input;
+
+      if (!context.session) {
+        throw new AuthenticationError("You must be logged in to update a post");
+      }
+
+      return await prisma.post.update({
+        where: { id: args.id },
+        data: {
+          title,
+          content,
+          published: publish,
+        },
+        include: {
+          author: true,
+        },
+      });
+    },
+
     async deletePost(parent, args, context) {
       if (!context.session) {
-        throw new AuthenticationError("You must be logged in to create a post");
+        throw new AuthenticationError("You must be logged in to delete a post");
       }
 
       return await prisma.post.delete({
