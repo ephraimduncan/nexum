@@ -39,7 +39,11 @@ a+a {
   border-radius: 3px;
 }
 
-p {
+.right .profile {
+  cursor: pointer;
+}
+
+.profile {
   display: inline-block;
   font-size: 13px;
   padding-right: 1rem;

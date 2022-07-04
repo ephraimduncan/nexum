@@ -61,9 +61,11 @@ const Header = () => {
     );
     right = (
       <div className="right">
-        <p>
-          {session.user.name} ({session.user.email})
-        </p>
+        <Link href="/profile">
+          <a className="profile">
+            {session.user.name} ({session.user.email})
+          </a>
+        </Link>
         <button onClick={() => signOut()}>
           <a>Log out</a>
         </button>
