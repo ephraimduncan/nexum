@@ -13,16 +13,17 @@ export const typeDefs = gql`
   type Mutation {
     createPost(input: PostInput!): Post
     publishPost(id: ID!): Post
+    deletePost(id: ID!): Post!
   }
 
   type User {
     id: ID!
-    name: String
-    email: String
+    name: String!
+    email: String!
     emailVerified: Boolean
     image: String
-    createdAt: DateTime
-    updatedAt: DateTime
+    createdAt: DateTime!
+    updatedAt: DateTime!
   }
 
   type Post {
@@ -30,7 +31,7 @@ export const typeDefs = gql`
     title: String!
     content: String
     published: Boolean!
-    author: User
+    author: User!
   }
 
   input PostInput {

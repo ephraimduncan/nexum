@@ -77,6 +77,12 @@ export const resolvers = {
         },
       });
     },
+
+    async deletePost(parent, args, context) {
+      return await prisma.post.delete({
+        where: { id: args.id },
+      });
+    },
   },
 
   DateTime: new GraphQLScalarType({
