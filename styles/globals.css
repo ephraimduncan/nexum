@@ -32,7 +32,8 @@ a+a {
   margin-left: auto;
 }
 
-.right button {
+.right button,
+.post-button button {
   padding: 0.5rem 1rem;
   border-radius: 3px;
 }
@@ -60,7 +61,7 @@ nav {
 }
 
 .container {
-  padding: 0 2rem;
+  padding: 0 10rem;
 }
 
 .bold {
@@ -166,5 +167,15 @@ input[type="submit"] {
 }
 
 .back {
+  margin-left: 1rem;
+}
+
+.post-button {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.post-button button {
   margin-left: 1rem;
 }

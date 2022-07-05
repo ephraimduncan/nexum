@@ -75,7 +75,12 @@ const Header = () => {
             {session.user.name} ({session.user.email})
           </a>
         </Link>
-        <button onClick={() => signOut()}>
+        <button
+          onClick={() => {
+            signOut();
+            router.push("/");
+          }}
+        >
           <a>Log out</a>
         </button>
       </div>

@@ -39,7 +39,7 @@ export default function CreatePost() {
   return (
     <WithAuth>
       <Layout>
-        <div>
+        <div className="post-page">
           <form onSubmit={submitData}>
             <h1>New Post</h1>
             <input
