@@ -1,7 +1,8 @@
-import request, { gql } from "graphql-request";
+import { gql } from "graphql-request";
 import Image from "next/image";
 import React from "react";
 import Layout from "../../components/Layout";
+import client from "../../graphql/client";
 
 export default function PostPage({ post }) {
   return (
@@ -41,7 +42,7 @@ export async function getServerSideProps({ params }) {
     id: params.id,
   };
 
-  const data = await request("http://localhost:3000/api/graphql", query, variables);
+  const data = await client.request(query, variables);
 
   return {
     props: data,

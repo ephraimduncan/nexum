@@ -1,8 +1,8 @@
-import React from "react";
-import { request, gql } from "graphql-request";
+import { gql } from "graphql-request";
 import Layout from "../components/Layout";
 import Post from "../components/Post";
 import WithAuth from "../lib/WithAuth";
+import client from "../graphql/client";
 
 export default function Drafts(props) {
   return (
@@ -38,7 +38,7 @@ export async function getServerSideProps({ req, res }) {
     }
   `;
 
-  const data = await request("http://localhost:3000/api/graphql", query);
+  const data = await client.request(query);
 
   return {
     props: data,

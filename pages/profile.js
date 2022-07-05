@@ -1,8 +1,9 @@
-import request, { gql } from "graphql-request";
+import { gql } from "graphql-request";
 import { useSession } from "next-auth/react";
 import Image from "next/image";
 import Layout from "../components/Layout";
 import Post from "../components/Post";
+import client from "../graphql/client";
 import WithAuth from "../lib/WithAuth";
 
 export default function ProfilePage(props) {
@@ -54,7 +55,7 @@ export async function getServerSideProps({ req, res }) {
     }
   `;
 
-  const data = await request("http://localhost:3000/api/graphql", query);
+  const data = await client.request(query);
 
   return {
     props: data,
