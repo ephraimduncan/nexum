@@ -10,6 +10,14 @@ body {
     Ubuntu, Cantarell, Fira Sans, Droid Sans, Helvetica Neue, sans-serif;
 }
 
+::selection {
+  background: #2563EB;
+}
+
+::-moz-selection {
+  background: #2563EB;
+}
+
 a {
   color: inherit;
   text-decoration: none;
