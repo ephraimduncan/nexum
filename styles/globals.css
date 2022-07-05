@@ -179,3 +179,26 @@ input[type="submit"] {
 .post-button button {
   margin-left: 1rem;
 }
+
+footer {
+  text-align: center;
+  height: 34px;
+  position: absolute;
+  bottom: 0;
+  left: 50%;
+  -webkit-transform: translate(-50%, -50%);
+  transform: translate(-50%, -50%);
+}
+
+footer a {
+  text-decoration: none;
+  color: rgba(0, 0, 0, 0.30);
+  font-weight: 300;
+  transition-property: all;
+  transition-duration: 0.25s;
+  transition-timing-function: ease-in-out;
+}
+
+footer a:hover {
+  color: #2E2E30;
+}
