@@ -79,7 +79,7 @@ nav {
   margin: 1rem 0;
 }
 
-.draft-post {
+.post-card {
   color: inherit;
   padding: 1rem;
   border: 1px solid gray;
@@ -88,4 +88,17 @@ nav {
 /* Drafts */
 h1 {
   margin-bottom: 1rem;
+}
+
+.profile-card {
+  display: flex;
+  margin-bottom: 1rem;
+}
+
+.profile-card img {
+  border-radius: 50%;
+}
+
+.profile-card div {
+  margin: 0.5rem;
 }
