@@ -61,6 +61,11 @@ const Header = () => {
             Drafts
           </a>
         </Link>
+        <Link href="/create">
+          <a className="bold draft" data-active={isActive("/create")}>
+            New Post
+          </a>
+        </Link>
       </div>
     );
     right = (

@@ -1,6 +1,6 @@
-import { gql } from "graphql-request";
-import Image from "next/image";
 import React from "react";
+import Image from "next/image";
+import { gql } from "graphql-request";
 import Layout from "../../components/Layout";
 import client from "../../graphql/client";
 
@@ -15,7 +15,7 @@ export default function PostPage({ post }) {
         </div>
 
         {post.published ? <p className="publish">Published</p> : <p className="publish">Draft</p>}
-        <p className="content">{post.content}</p>
+        <pre className="content">{post.content}</pre>
       </div>
     </Layout>
   );

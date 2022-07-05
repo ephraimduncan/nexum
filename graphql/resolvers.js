@@ -46,7 +46,7 @@ export const resolvers = {
 
   Mutation: {
     async createPost(_, args, context) {
-      const { title, content } = args.input;
+      const { title, content, publish } = args.input;
 
       if (!context.session) {
         throw new AuthenticationError("You must be logged in to create a post");
@@ -56,7 +56,7 @@ export const resolvers = {
         data: {
           title: title,
           content: content,
-          published: false,
+          published: publish,
           author: { connect: { email: context.session?.user?.email } },
         },
       });
