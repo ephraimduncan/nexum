@@ -83,6 +83,8 @@ nav {
   color: inherit;
   padding: 1rem;
   border: 1px solid gray;
+  cursor: pointer;
+
 }
 
 /* Drafts */
@@ -95,10 +97,43 @@ h1 {
   margin-bottom: 1rem;
 }
 
+.preview-post .author img,
 .profile-card img {
   border-radius: 50%;
 }
 
 .profile-card div {
   margin: 0.5rem;
+}
+
+.post-card-draft {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.draft-span {
+  color: #f43f5e;
+}
+
+.preview-post .author {
+  display: flex;
+  margin-bottom: 0.75rem;
+}
+
+.preview-post .author h3 {
+  margin-left: 0.5rem;
+}
+
+.publish {
+  background: #eee;
+  display: inline-block;
+  padding: 0.5rem;
+  margin: 0.2rem 0;
+  border-radius: 10px;
+}
+
+.content {
+  margin-top: 1rem;
+  font-size: 24px;
 }

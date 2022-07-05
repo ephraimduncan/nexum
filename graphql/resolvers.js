@@ -19,7 +19,7 @@ export const resolvers = {
         },
         include: {
           author: {
-            select: { name: true }, // Returns only the name of the author
+            select: { name: true, id: true, image: true },
           },
         },
       });

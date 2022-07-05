@@ -13,7 +13,7 @@ export default function ProfilePage(props) {
       <Layout>
         <div>
           <h1>Profile Page</h1>
-          {status === "loading" ? (
+          {!session ? (
             <div>Loading Skeleton</div>
           ) : (
             <div className="profile-card">
