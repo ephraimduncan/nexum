@@ -6,10 +6,10 @@ export const typeDefs = gql`
   type Query {
     # users: [User!]!
     # user(email: String!): User!
-    posts: [Post!]!
+    userPosts(id: ID!): [Post!]
     post(id: ID!): Post!
     publishedPosts: [Post!]
-    drafts: [Post!]
+    userDrafts(id: ID!): [Post!]
   }
 
   type Mutation {

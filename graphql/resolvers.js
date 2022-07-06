@@ -4,8 +4,11 @@ import { AuthenticationError } from "apollo-server-errors";
 
 export const resolvers = {
   Query: {
-    async posts(_, args, context) {
+    async userPosts(_, args, context) {
       return await context.prisma.post.findMany({
+        where: {
+          author: { id: args.id },
+        },
         include: {
           author: true,
         },
@@ -25,9 +28,12 @@ export const resolvers = {
       });
     },
 
-    async drafts(_, args, context) {
+    async userDrafts(_, args, context) {
       return await context.prisma.post.findMany({
-        where: { published: false },
+        where: {
+          author: { id: args.id },
+          published: false,
+        },
         include: {
           author: true,
         },
