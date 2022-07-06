@@ -1,5 +1,5 @@
 import { GraphQLClient } from "graphql-request";
 
-const client = new GraphQLClient("https://nexum.vercel.app/api/graphql");
+const client = new GraphQLClient("http://localhost:3000/api/graphql");
 
 export default client;

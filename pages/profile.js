@@ -5,6 +5,8 @@ import Layout from "../components/Layout";
 import Post from "../components/Post";
 import client from "../graphql/client";
 import WithAuth from "../lib/WithAuth";
+import { authOptions } from "./api/auth/[...nextauth]";
+import { unstable_getServerSession } from "next-auth/next";
 
 export default function ProfilePage(props) {
   const { data: session, status } = useSession();
@@ -28,38 +30,38 @@ export default function ProfilePage(props) {
         </div>
 
         <h1>My Posts</h1>
-        {props.posts
-          .filter((post) => post?.author?.id === session?.userId)
-          .map((post) => {
-            return (
-              <div key={post.id} className="post">
-                <Post post={post} />
-              </div>
-            );
-          })}
+        {props.userPosts.map((post) => {
+          return (
+            <div key={post.id} className="post">
+              <Post post={post} />
+            </div>
+          );
+        })}
       </Layout>
     </WithAuth>
   );
 }
 
 export async function getServerSideProps({ req, res }) {
+  const session = await unstable_getServerSession(req, res, authOptions);
+
   const query = gql`
-    {
-      posts {
-        content
-        published
-        id
-        title
+    query getUserPosts($id: ID!) {
+      userPosts(id: $id) {
         author {
+          image
           name
-          email
           id
         }
+        content
+        id
+        published
+        title
       }
     }
   `;
 
-  const data = await client.request(query);
+  const data = await client.request(query, { id: session.userId });
 
   return {
     props: data,
