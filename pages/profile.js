@@ -28,11 +28,15 @@ export default function ProfilePage(props) {
         </div>
 
         <h1>My Posts</h1>
-        {props.posts.map((post) => (
-          <div key={post.id} className="post">
-            <Post post={post} />
-          </div>
-        ))}
+        {props.posts
+          .filter((post) => post?.author?.id === session?.userId)
+          .map((post) => {
+            return (
+              <div key={post.id} className="post">
+                <Post post={post} />
+              </div>
+            );
+          })}
       </Layout>
     </WithAuth>
   );
