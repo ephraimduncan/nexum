@@ -7,8 +7,11 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
-    "generate-client": "prisma generate --data-proxy",
-    "migrate": "DATABASE_URL=\"$MIGRATE_DATABASE_URL\" prisma migrate deploy"
+    "generate": "prisma generate",
+    "migrate-dev": "prisma migrate dev",
+    "migrate-deploy": "prisma migrate deploy",
+    "generate-data-proxy": "prisma generate --data-proxy",
+    "migrate-deploy-data-proxy": "DATABASE_URL=\"$MIGRATE_DATABASE_URL\" prisma migrate deploy"
   },
   "dependencies": {
     "@graphql-yoga/node": "^2.9.2",
