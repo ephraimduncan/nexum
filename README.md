@@ -80,6 +80,8 @@ We create a GraphQL at `/api/graphql` using GraphQL Yoga, GraphQL resolvers are 
 
 On the client-side we use GraphQL Request to execute GraphQL queries. On a development server, you can get a GraphQL playground at http://localhost:3000/api/graphql.
 
+Update the GraphQL API endpoint  to `http://localhost:3000/api/graphql` in your local development and switch it to `https://<your-deployed-domain>/api/graphql` in production respectively.
+
 ## License
 
 MIT &copy; [Ephraim Atta-Duncan](https://github.com/dephraiim)
