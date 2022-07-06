@@ -18,7 +18,7 @@ export default function ProfilePage(props) {
             <div>Loading Skeleton</div>
           ) : (
             <div className="profile-card">
-              <Image src={session.user.image} width="80" height="80" />
+              <Image alt="Profile Picture" src={session.user.image} width="80" height="80" />
               <div>
                 <h2>{session.user.name}</h2>
                 <p>{session.user.email}</p>

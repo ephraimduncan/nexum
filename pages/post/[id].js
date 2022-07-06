@@ -36,7 +36,7 @@ export default function PostPage({ post }) {
       <div className="preview-post">
         <h1>{post.title}</h1>
         <div className="author">
-          <Image src={post.author.image} width={24} height={24} />
+          <Image alt="Profile Picture" src={post.author.image} width={24} height={24} />
           <h3>{post.author.name}</h3>
         </div>
 
