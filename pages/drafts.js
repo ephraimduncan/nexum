@@ -3,23 +3,20 @@ import Layout from "../components/Layout";
 import Post from "../components/Post";
 import WithAuth from "../lib/WithAuth";
 import client from "../graphql/client";
-import { useSession } from "next-auth/react";
+import { authOptions } from "./api/auth/[...nextauth]";
+import { unstable_getServerSession } from "next-auth/next";
 
 export default function Drafts(props) {
-  const { data: session, status } = useSession();
-
   return (
     <WithAuth>
       <Layout>
         <h1>My Drafts</h1>
         <div>
-          {props.drafts
-            .filter((post) => post?.author?.id === session?.userId)
-            .map((post) => (
-              <div key={post.id} className="post">
-                <Post post={post} />
-              </div>
-            ))}
+          {props.userDrafts.map((post) => (
+            <div key={post.id} className="post">
+              <Post post={post} />
+            </div>
+          ))}
         </div>
       </Layout>
     </WithAuth>
@@ -27,23 +24,25 @@ export default function Drafts(props) {
 }
 
 export async function getServerSideProps({ req, res }) {
+  const session = await unstable_getServerSession(req, res, authOptions);
+
   const query = gql`
-    {
-      drafts {
-        content
-        published
-        id
-        title
+    query getUserDrafts($id: ID!) {
+      userDrafts(id: $id) {
         author {
+          image
           name
-          email
           id
         }
+        content
+        id
+        published
+        title
       }
     }
   `;
 
-  const data = await client.request(query);
+  const data = await client.request(query, { id: session.userId });
 
   return {
     props: data,
